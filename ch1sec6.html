@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.6. Exercices &#8212; Traitement Numerique du Signal - Signaux et systèmes à temps discret</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script >let toggleHintShow = 'Click to show';</script>
+    <script >let toggleHintHide = 'Click to hide';</script>
+    <script >let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Transformée de Fourier Discrète (TFD)" href="ch2intro.html" />
+    <link rel="prev" title="1.5. Notion de temps de traitement et de traitement temps réel" href="ch1sec5.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/N7solo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Traitement Numerique du Signal - Signaux et systèmes à temps discret</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenue au cours de Traitement Numérique du Signal
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="ch1intro.html">
+   1. Introduction
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec1.html">
+     1.1. Numérisation du signal : échantillonnage
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec2.html">
+     1.2. Numérisation du signal : Quantification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec3.html">
+     1.3. Numérisation du signal : exemples sur une image
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec4.html">
+     1.4. Outils de traitement du signal à numériser
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec5.html">
+     1.5. Notion de temps de traitement et de traitement temps réel
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1.6. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch2intro.html">
+   2. Transformée de Fourier Discrète (TFD)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec1.html">
+     2.1. De la TF à la TFD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec2.html">
+     2.2. Propriétés de la TFD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec3.html">
+     2.3. Algorithme de calcul rapide (FFT) de Cooley Tuckey
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec4.html">
+     2.4. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch3intro.html">
+   3. Fonctions d’inter et d’auto correlation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec1.html">
+     3.1. Calcul dans le domaine temporel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec2.html">
+     3.2. Calcul dans le domaine fréquentiel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec3.html">
+     3.3. Quelques propriétés
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch4intro.html">
+   4. Densité Spectrale de Puissance (DSP)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec1.html">
+     4.1. Estimateurs “de base” : corrélogramme, périodogramme
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec2.html">
+     4.2. Périodogramme avec fenêtrage
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec3.html">
+     4.3. Périodogramme cumulé (ou de Bartlett)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec4.html">
+     4.4. Périodogramme de Welch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec5.html">
+     4.5. Exemple sur une ligne d’image SAR
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch5intro.html">
+   5. La transformée en z
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec1.html">
+     5.1. Définition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec2.html">
+     5.2. Convergence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec3.html">
+     5.3. Propriétés
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec4.html">
+     5.4. Transformée en z inverse
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec5.html">
+     5.5. Tables de transformées en z
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec6.html">
+     5.6. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch6intro.html">
+   6. Filtrage numérique
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec1.html">
+     6.1. Un outil d’étude : la transformée en z
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec2.html">
+     6.2. Définitions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec3.html">
+     6.3. Réalisabilité d’un filtre numérique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec4.html">
+     6.4. Classification des filtres numériques rationnels : RIF, RII
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec5.html">
+     6.6. Stabilité des filtres numériques rationnels récursifs (RII)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="biblio.html">
+   7. Bibliographie
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Lien vers la page principale du cours <a href="https://ch-poulliat.github.io/Cours-TS-SN1A-N7/intro.html"> Traitement du Signal</a>.
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://ch-poulliat.github.io/Cours-Signal-Part-I/intro.html"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://ch-poulliat.github.io/Cours-Signal-Part-I/intro.html/issues/new?title=Issue%20on%20page%20%2Fch1sec6.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/ch1sec6.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Exercices</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="section" id="exercices">
+<h1><span class="section-number">1.6. </span>Exercices<a class="headerlink" href="#exercices" title="Permalink to this headline">#</a></h1>
+<p>Les corrections se trouvent dans le poly d’exercices et problèmes résolus.</p>
+<div class="exercise admonition" id="exercice1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.1 </span> (Cosinus mal échantillonné)</p>
+<div class="section" id="exercise-content">
+<p>On échantillonne le signal <span class="math notranslate nohighlight">\(x(t)=\cos \left( 2\pi f_{0}t\right)\)</span> avec <span class="math notranslate nohighlight">\(f_{0}=5kHz\)</span> à la fréquence d’échantillonnage <span class="math notranslate nohighlight">\(F_{e}=8kHz\)</span>.</p>
+<ol class="simple">
+<li><p>Déterminer la densité spectrale du signal échantillonné <span class="math notranslate nohighlight">\(x_{e}(t)\)</span> et la représenter graphiquement pour <span class="math notranslate nohighlight">\(\left\vert f\right\vert &lt;12kHz\)</span>.</p></li>
+<li><p>Quel signal obtient-on si on filtre le signal <span class="math notranslate nohighlight">\(x_{e}(t)\)</span> précédent à l’aide d’un filtre passe-bas idéal de fréquence de coupure <span class="math notranslate nohighlight">\(F_{c}=4kHz\)</span> ? Même question si on filtre le signal <span class="math notranslate nohighlight">\(x_{e}(t)\)</span> à l’aide d’un filtre passe-bande idéal de bande passante <span class="math notranslate nohighlight">\(\left[ -6kHz,-4kHz\right] \cup \left[ 4kHz,6kHz\right]\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="exercise admonition" id="exercice2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.2 </span> (Effet de l’échantillonnage)</p>
+<div class="section" id="exercise-content">
+<p>Soit le signal suivant : <span class="math notranslate nohighlight">\(x(t)=\cos(2 \pi f_0 t),  \; f_0=10\)</span> kHz.</p>
+<ol>
+<li><p>Tracer la transformée de Fourier de <span class="math notranslate nohighlight">\(x(t)\)</span>: <span class="math notranslate nohighlight">\(X(f)\)</span>.</p></li>
+<li><p>Est-il possible d’échantillonner <span class="math notranslate nohighlight">\(x(t)\)</span> sans perte d’information ? Si oui à quelle condition ?</p></li>
+<li><p>Tracer, entre <span class="math notranslate nohighlight">\(0\)</span> et <span class="math notranslate nohighlight">\(F_e\)</span>, la transformée de Fourier de <span class="math notranslate nohighlight">\(x(t)\)</span> échantillonné à <span class="math notranslate nohighlight">\(T_e=1/F_e\)</span> quand :</p>
+<p>a. <span class="math notranslate nohighlight">\(F_e=30\)</span> kHz.</p>
+<p>b. <span class="math notranslate nohighlight">\(F_e=8\)</span> kHz.</p>
+</li>
+<li><p>A partir des échantillons nous souhaitons reconstruire <span class="math notranslate nohighlight">\(x(t)\)</span> par filtrage passe-bas à <span class="math notranslate nohighlight">\(F_e/2\)</span>. Quels seront les signaux obtenus pour chaque fréquence d’échantillonnage précédente ?</p></li>
+</ol>
+</div>
+</div>
+<div class="exercise admonition" id="exercice3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.3 </span> (Echantillonnage d’un signal passe-bande)</p>
+<div class="section" id="exercise-content">
+<p>On considère le signal <span class="math notranslate nohighlight">\(x(t)=x^+(t)+x^-(t)\)</span>, avec <span class="math notranslate nohighlight">\(x^+(t)=B\frac{sin(\pi Bt)}{\pi B t}e^{j 2 \pi f_0 t}\)</span> et <span class="math notranslate nohighlight">\(x^-(t)=B\frac{sin(\pi Bt)}{\pi B t}e^{-j 2 \pi f_0 t}\)</span>, <span class="math notranslate nohighlight">\(f_0=8 kHz\)</span> et <span class="math notranslate nohighlight">\(B=2 kHz\)</span>.</p>
+<ol>
+<li><p>Déterminer la transformée de Fourier du signal <span class="math notranslate nohighlight">\(x(t)\)</span> et la représenter graphiquement.</p></li>
+<li><p>Comment s’écrit la condition de Shannon pour le signal <span class="math notranslate nohighlight">\(x(t)\)</span> ?</p></li>
+<li><p>On échantillonne le signal <span class="math notranslate nohighlight">\(x(t)\)</span> à la fréquence <span class="math notranslate nohighlight">\(F_e=6 kHz\)</span>.</p>
+<p>a. Représenter graphiquement la transformée de Fourier du signal échantillonné <span class="math notranslate nohighlight">\(x_e(t)\)</span> dans la bande <span class="math notranslate nohighlight">\(\left[- 9 kHz, 9 kHz\right].\)</span></p>
+<p>b. On désire restituer le signal <span class="math notranslate nohighlight">\(x(t)\)</span> à partir de <span class="math notranslate nohighlight">\(x_e(t)\)</span> par un filtrage de réponse en fréquence <span class="math notranslate nohighlight">\(H(f)\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(1^{ier}\)</span> cas : <span class="math notranslate nohighlight">\(H(f)=\Pi_F(f)\)</span> avec <span class="math notranslate nohighlight">\(F=6 kHz\)</span>. Quel sera le signal restitué par ce filtre ?</p></li>
+<li><p><span class="math notranslate nohighlight">\(2^{ème}\)</span> cas : <span class="math notranslate nohighlight">\(H(f)=\Pi_B(f+f_0)+\Pi_B(f-f_0)\)</span> avec <span class="math notranslate nohighlight">\(f_0=8 kHz\)</span> et <span class="math notranslate nohighlight">\(B=2 kHz\)</span>. Quel sera le signal restitué par ce filtre ?</p></li>
+<li><p>Conclusion ?</p></li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<div class="exercise admonition" id="exercice4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.4 </span> (Echantillonneur moyenneur)</p>
+<div class="section" id="exercise-content">
+<p>L’échantillonneur moyenneur est une méthode pratique d’échantillonnage qui consiste à calculer, toutes les <span class="math notranslate nohighlight">\(T_e\)</span> secondes (période d’échantillonnage), la valeur moyenne du signal pendant un intervalle de temps <span class="math notranslate nohighlight">\(\theta \)</span> (<span class="math notranslate nohighlight">\(\theta &lt;&lt;T\)</span>) et à affecter cette valeur moyenne à l’échantillon discrétisé :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+y\left( kT_e\right) &amp;=\frac{1}{\theta }\int_{kT_e-\theta }^{kT_e}x(u)du \\
+x_{ech}(t) &amp;=\sum_k y\left( kT_e\right) \delta \left( t-kT_e\right)
+\end{align*}\end{split}\]</div>
+<ol>
+<li><p>Démontrer que le signal échantillonné <span class="math notranslate nohighlight">\(x_{ech}(t)\)</span> peut se mettre sous la forme :</p>
+<div class="math notranslate nohighlight">
+\[x_{ech}(t)=\frac{1}{\theta }\left[ \Pi _{\theta }\left( t\right) \ast x\left( t-\frac{\theta }{2}\right) \right] .\amalg \hspace{-0.3cm}\amalg_{T_e}\left( t\right)\]</div>
+<p>où <span class="math notranslate nohighlight">\(\Pi _{\theta }\left( t\right) \)</span> et <span class="math notranslate nohighlight">\(\amalg \hspace{-0.3cm}\amalg_{T_e}\left( t\right) \)</span> représentent respectivement la fenêtre rectangulaire de largeur <span class="math notranslate nohighlight">\(\theta \)</span> et le peigne de Dirac de période <span class="math notranslate nohighlight">\(T_e\)</span>.</p>
+</li>
+<li><p>En déduire la transformée de Fourier correspondante <span class="math notranslate nohighlight">\(X_{ech}\left( f\right) \)</span>.</p></li>
+<li><p>En considérant un signal à support spectral borné <span class="math notranslate nohighlight">\(2\Delta f\)</span> et en prenant en compte que la fonction <span class="math notranslate nohighlight">\(sinc(\pi \theta f)\)</span> peut être supposé constante sur l’intervalle <span class="math notranslate nohighlight">\(\left[ -\frac{1}{3\theta },\frac{1}{3\theta }\right]\)</span>, ie.</p>
+<div class="math notranslate nohighlight">
+\[sinc(\pi \theta f)=\frac{\sin (\pi \theta f)}{\pi \theta f}\approx 1\text{pour }f\in \left[ -\frac{1}{3\theta },\frac{1}{3\theta }\right]\]</div>
+<p>a. quelle(s) condition(s) doit vérifier <span class="math notranslate nohighlight">\(\theta \)</span> pour que le signal <span class="math notranslate nohighlight">\(x(t)\)</span> puisse être restitué par filtrage de <span class="math notranslate nohighlight">\(x_{ech}(t)\)</span> ?</p>
+<p>b. Dans ces conditions peut-on échantillonner à la fréquence de Shannon ?</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="exercise admonition" id="exercice5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.5 </span> (Echantillonneur bloqueur)</p>
+<div class="section" id="exercise-content">
+<p>L’échantillonneur bloqueur est un échantillonneur réalisable en pratique qui consiste à acquérir un échantillon du signal, <span class="math notranslate nohighlight">\(x(t)\)</span>, toutes les <span class="math notranslate nohighlight">\(T_e\)</span> secondes (période d’échantillonnage) et à le bloquer pendant <span class="math notranslate nohighlight">\(\tau\)</span> secondes (<span class="math notranslate nohighlight">\(\tau&lt;&lt;T_e\)</span>).</p>
+<ol class="simple">
+<li><p>Proposer une écriture du signal échantillonné de cette manière, <span class="math notranslate nohighlight">\(x_e(t)\)</span>, en fonction de l’expression du signal échantillonné de manière idéale : <span class="math notranslate nohighlight">\(x_{ei}(t)=\sum_{k\in \mathbb{Z}} x(kT_e) \delta(t-kT_e)\)</span>.</p></li>
+<li><p>Calculer la transformée de Fourier du signal échantillonné à l’aide de cette méthode. L’écrire en fonction de la transformée de Fourier, <span class="math notranslate nohighlight">\(X(f)\)</span>, du signal de départ.</p></li>
+<li><p>Est-il possible de dimensionner <span class="math notranslate nohighlight">\(\tau\)</span> pour que l’échantillonnage par bloqueur se rapproche d’un échantillonnage idéal ?</p></li>
+</ol>
+</div>
+</div>
+<div class="exercise admonition" id="exercice6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.6 </span> (Signal à spectre non borné - Recherche de la <span class="math notranslate nohighlight">\(F_e\)</span>)</p>
+<div class="section" id="exercise-content">
+<p>Soit le signal <span class="math notranslate nohighlight">\(x(t)\)</span> défini par :</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4827cd14-7e9b-46e2-9f76-51a98c498b04">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-4827cd14-7e9b-46e2-9f76-51a98c498b04" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{eq_signal}
+        x(t) = \left\{
+            \begin{array}{rl}
+                e^{-at} &amp; \mbox{si } t\geq 0, a&gt;0\\
+                0 &amp; \mbox{si } t&lt;0. \\
+            \end{array} \right. \;
+\end{equation}\]</div>
+<ol class="simple">
+<li><p>Déterminer la transformée de Fourier <span class="math notranslate nohighlight">\(X(f)\)</span> du signal <span class="math notranslate nohighlight">\(x(t)\)</span>. Tracer <span class="math notranslate nohighlight">\(\left|X(f)\right|\)</span>.</p></li>
+<li><p>En théorie le signal <span class="math notranslate nohighlight">\(x(t)\)</span> est-il échantillonnable sans perte d’information ? Expliquez votre réponse.</p></li>
+<li><p>En considérant la transformée de Fourier comme négligeable pour une atténuation minimale de <span class="math notranslate nohighlight">\(40\)</span> dB par rapport à sa valeur maximum, dimensionner la fréquence d’échantillonnage, <span class="math notranslate nohighlight">\(F_e\)</span>, à utiliser.</p></li>
+<li><p>Une fois <span class="math notranslate nohighlight">\(F_e\)</span> déterminée, quel traitement doit-on appliquer au signal avant de l’échantillonner ?</p></li>
+</ol>
+</div>
+</div>
+<div class="exercise admonition" id="exercice7">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.7 </span> (Quantification d’un sinusoïde)</p>
+<div class="section" id="exercise-content">
+<p>Soit un signal sinusoïdal <span class="math notranslate nohighlight">\(x(t)=A_{0} \sin \left( 2\pi f_0t+\phi\right)\)</span>, avec <span class="math notranslate nohighlight">\(f_{0}=50Hz\)</span>, <span class="math notranslate nohighlight">\(A_{0}=220\sqrt{2}V\)</span> et <span class="math notranslate nohighlight">\(\phi\)</span> une phase aléatoire uniformément répartie entre <span class="math notranslate nohighlight">\(0\)</span> et <span class="math notranslate nohighlight">\(2 \pi\)</span>. On suppose que la quantification de cette sinusoïde est effectuée dans de bonnes conditions : pas d’écrétage du signal, pas de quantification <span class="math notranslate nohighlight">\(q=\frac{D}{2^{nb}}\)</span> suffisament fin (<span class="math notranslate nohighlight">\(D\)</span> représentant la dynamique du signal et <span class="math notranslate nohighlight">\(nb\)</span> le nombre de bits de quantification). Elle est donc équivalente à l’ajout d’un bruit, <span class="math notranslate nohighlight">\(n_Q(t)\)</span>, sur le signal non quantifié de départ, bruit aléatoire, centré qui suit une loi uniforme sur <span class="math notranslate nohighlight">\(\left[-\frac{q}{2}, \; \frac{q}{2}\right]\)</span>.</p>
+<p>Déterminer le rapport signal à bruit de quantification en fonction de <span class="math notranslate nohighlight">\(nb\)</span>.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="ch1sec5.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">1.5. </span>Notion de temps de traitement et de traitement temps réel</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="ch2intro.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Transformée de Fourier Discrète (TFD)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By N. Thomas<br/>
+  
+      &copy; Copyright 2021.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,3 @@
+## Un outil d'étude : la transformée en z
+
+Tout comme la transformée de Laplace permet l'étude des filtres analogiques de type LIT, la transformée en z va permettre l'étude des filtres numériques LIT. Tout comme, la transformée de Laplace permet de réaliser à la fois une étude temporelle (quand $p \in \mathbb{C}$) et une étude fréquentielle (quand $p=j \omega$) des filtres analogiques LIT, la transformée en z va permettre à la fois de réaliser à la fois une étude temporelle (quand $z \in \mathbb{C}$)  et une étude fréquentielle (quand $z=e^{j \omega}=e^{j 2 \pi f}$) des filtres numériques LIT. Les principaux éléments concernant la transformée en $z$ sont donnés dans le chapitre précédent.

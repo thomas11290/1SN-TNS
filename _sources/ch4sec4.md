@@ -1,0 +1,3 @@
+## Périodogramme de Welch
+
+Cette méthode a été proposée par Peter D. Welch en $1967$. Le principe est le même que pour le périodogramme cumulé mais les différentes parties $x_i$ sont autorisées à se recouvrir, ce qui réduit encore la variance d'estimation de la DSP pour une même résolution, et le signal est fenêtré avant calcul de la TFD. Typiquement on laisse les fenêtres se recouvrir sur la moitié de leur longueur et la fenêtre de troncature par défaut est celle de Hamming.

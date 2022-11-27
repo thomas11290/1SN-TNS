@@ -1,0 +1,1004 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7.7. Synthèse des filtres numériques rationnels &#8212; Traitement Numerique du Signal - Signaux et systèmes à temps discret</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script >let toggleHintShow = 'Click to show';</script>
+    <script >let toggleHintHide = 'Click to hide';</script>
+    <script >let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7.8. Implantation des filtres numériques rationnels" href="ch6sec7.html" />
+    <link rel="prev" title="7.6. Stabilité des filtres numériques rationnels récursifs (RII)" href="ch6sec5.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/N7solo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Traitement Numerique du Signal - Signaux et systèmes à temps discret</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenue au cours de Traitement Numérique du Signal
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch1intro.html">
+   1. Introduction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec1.html">
+     1.1. Numérisation du signal : échantillonnage
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec2.html">
+     1.2. Numérisation du signal : Quantification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec3.html">
+     1.3. Numérisation du signal : exemples sur une image
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec4.html">
+     1.4. Outils de traitement du signal à numériser
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec5.html">
+     1.5. Notion de temps de traitement et de traitement temps réel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec6.html">
+     1.6. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch1bintro.html">
+   2. Signaux et systèmes à temps discret
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1bsec1.html">
+     2.1. Signaux à temps discret
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1bsec2.html">
+     2.2. Outils de traitement pour les signaux à temps discret
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1bsec3.html">
+     2.3. Systèmes à temps discret
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1bsec4.html">
+     2.5. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch2intro.html">
+   3. Transformée de Fourier Discrète (TFD)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec1.html">
+     3.1. De la TF à la TFD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec2.html">
+     3.2. Propriétés de la TFD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec3.html">
+     3.3. Algorithme de calcul rapide (FFT) de Cooley Tuckey
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec4.html">
+     3.4. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch3intro.html">
+   4. Fonctions d’inter et d’auto correlation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec1.html">
+     4.1. Calcul dans le domaine temporel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec2.html">
+     4.2. Calcul dans le domaine fréquentiel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec3.html">
+     4.3. Quelques propriétés
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch4intro.html">
+   5. Densité Spectrale de Puissance (DSP)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec1.html">
+     5.1. Estimateurs “de base” : corrélogramme, périodogramme
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec2.html">
+     5.2. Périodogramme avec fenêtrage
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec3.html">
+     5.3. Périodogramme cumulé (ou de Bartlett)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec4.html">
+     5.4. Périodogramme de Welch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec5.html">
+     5.5. Exemple sur une ligne d’image SAR
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch5intro.html">
+   6. La transformée en z
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec1.html">
+     6.1. Définition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec2.html">
+     6.2. Convergence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec3.html">
+     6.3. Propriétés
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec4.html">
+     6.4. Transformée en z inverse
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec5.html">
+     6.5. Tables de transformées en z
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec6.html">
+     6.6. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="ch6intro.html">
+   7. Filtrage numérique
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec1.html">
+     7.1. Un outil d’étude : la transformée en z
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec2.html">
+     7.2. Définitions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec3.html">
+     7.3. Réalisabilité d’un filtre numérique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec4.html">
+     7.4. Classification des filtres numériques rationnels : RIF, RII
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec5.html">
+     7.6. Stabilité des filtres numériques rationnels récursifs (RII)
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     7.7. Synthèse des filtres numériques rationnels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec7.html">
+     7.8. Implantation des filtres numériques rationnels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec8.html">
+     7.9. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="biblio.html">
+   8. Bibliographie
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Lien vers la page principale du cours <a href="https://ch-poulliat.github.io/Cours-TS-SN1A-N7/intro.html"> Traitement du Signal</a>.
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://ch-poulliat.github.io/Cours-Signal-Part-I/intro.html"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://ch-poulliat.github.io/Cours-Signal-Part-I/intro.html/issues/new?title=Issue%20on%20page%20%2Fch6sec6.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/ch6sec6.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   7.7.1. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synthese-des-filtres-a-reponse-impulsionnelle-finie">
+   7.7.2. Synthèse des filtres à réponse impulsionnelle finie
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#synthese-par-developpement-en-serie-de-fourier">
+     7.7.2.1. Synthèse par développement en série de Fourier
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avantages-inconvenients-des-filtres-rif">
+     7.7.2.2. Avantages/Inconvénients des filtres RIF
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synthese-des-filtres-a-reponse-impulsionnelle-infinie">
+   7.7.3. Synthèse des filtres à réponse impulsionnelle infinie
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#principe-de-la-methode">
+     7.7.3.1. Principe de la méthode
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mise-en-pratique">
+     7.7.3.2. Mise en pratique
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avantages-inconvenients-des-filtres-rii">
+     7.7.3.3. Avantages/Inconvénients des filtres RII
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Synthèse des filtres numériques rationnels</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   7.7.1. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synthese-des-filtres-a-reponse-impulsionnelle-finie">
+   7.7.2. Synthèse des filtres à réponse impulsionnelle finie
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#synthese-par-developpement-en-serie-de-fourier">
+     7.7.2.1. Synthèse par développement en série de Fourier
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avantages-inconvenients-des-filtres-rif">
+     7.7.2.2. Avantages/Inconvénients des filtres RIF
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synthese-des-filtres-a-reponse-impulsionnelle-infinie">
+   7.7.3. Synthèse des filtres à réponse impulsionnelle infinie
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#principe-de-la-methode">
+     7.7.3.1. Principe de la méthode
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mise-en-pratique">
+     7.7.3.2. Mise en pratique
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avantages-inconvenients-des-filtres-rii">
+     7.7.3.3. Avantages/Inconvénients des filtres RII
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="section" id="synthese-des-filtres-numeriques-rationnels">
+<h1><span class="section-number">7.7. </span>Synthèse des filtres numériques rationnels<a class="headerlink" href="#synthese-des-filtres-numeriques-rationnels" title="Permalink to this headline">#</a></h1>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 7.10 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>La synthèse d’un filtre numérique correspond au passage entre les spécifications à respecter et l’ensemble des coefficients définissant le filtre numérique.
+Les spécifications à respecter correspondent à un gabarit que l’on se donne sur la réponse en fréquence du filtre et qui fixe des marges dans lesquelles elle doit se trouver.<br />
+Les synthèses des filtres RIF et RII se font de manière très différente (cf plus loin).}</p>
+</div>
+</div><div class="section" id="introduction">
+<h2><span class="section-number">7.7.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p><strong>Notion de gabarit</strong></p>
+<p>Le gabarit à respecter pour le filtre à synthétiser correspond à la définition des marges dans lesquelles la réponse en fréquence du filtre synthétisé doit se trouver.</p>
+<p>Les figures <a class="reference internal" href="#gabarit"><span class="std std-numref">Fig. 7.2</span></a> et <a class="reference internal" href="#gabarit-db"><span class="std std-numref">Fig. 7.3</span></a> montrent un exemple de gabarit donné sur le module de la réponse en fréquence pour un filtrage de type passe-bas.</p>
+<div class="figure align-default" id="gabarit">
+<a class="reference internal image-reference" href="_images/Gabarit_PB.png"><img alt="_images/Gabarit_PB.png" src="_images/Gabarit_PB.png" style="height: 12cm;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7.2 </span><span class="caption-text">Exemple de gabarit à respecter (en rouge) pour un filtre passe-bas.</span><a class="headerlink" href="#gabarit" title="Permalink to this image">#</a></p>
+</div>
+<div class="figure align-default" id="gabarit-db">
+<a class="reference internal image-reference" href="_images/Gabarit_PB_dB.png"><img alt="_images/Gabarit_PB_dB.png" src="_images/Gabarit_PB_dB.png" style="height: 12cm;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7.3 </span><span class="caption-text">Exemple de gabarit (en dB) à respecter (en rouge) pour un filtre passe-bas.</span><a class="headerlink" href="#gabarit-db" title="Permalink to this image">#</a></p>
+</div>
+<p><strong>Réponses en fréquences idéales cibles pour la synthèse</strong></p>
+<p>La figure <a class="reference internal" href="#ft-cibles"><span class="std std-numref">Fig. 7.4</span></a> présentent les <span class="math notranslate nohighlight">\(4\)</span> réponses en fréquence idéales classiques : pour un filtre passe-bas qui laisse passer les fréquences autour de <span class="math notranslate nohighlight">\(0\)</span> (“basses fréquences”) jusqu’à la fréquence <span class="math notranslate nohighlight">\(\widetilde{f}_c\)</span> (fréquence de coupure normalisée), pour un filtre passe-haut qui coupe les fréquences autour de <span class="math notranslate nohighlight">\(0\)</span> (“basses fréquences”) jusqu’à la fréquence <span class="math notranslate nohighlight">\(\widetilde{f}_c\)</span> et laisse passer les fréquences au-delà de <span class="math notranslate nohighlight">\(\widetilde{f}_c\)</span> (“hautes fréquences”), pour un filtre passe-bande qui ne laisse passer que les fréquences se trouvant sur une certaine bande (entre <span class="math notranslate nohighlight">\(\widetilde{f}_{c_1}\)</span>  et <span class="math notranslate nohighlight">\(\widetilde{f}_{c_2}\)</span>) et coupe toutes les autres, pour un filtre coupe-bande (ou réjecteur) qui laisse passer toutes les fréquences sauf celles se trouvant entre <span class="math notranslate nohighlight">\(\widetilde{f}_{c_1}\)</span>  et <span class="math notranslate nohighlight">\(\widetilde{f}_{c_2}\)</span>.</p>
+<div class="figure align-default" id="ft-cibles">
+<a class="reference internal image-reference" href="_images/FT_cibles.png"><img alt="_images/FT_cibles.png" src="_images/FT_cibles.png" style="height: 12cm;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7.4 </span><span class="caption-text">Réponse en fréquences idéales (cibles pour la synthèse).</span><a class="headerlink" href="#ft-cibles" title="Permalink to this image">#</a></p>
+</div>
+<div class="proof remark admonition" id="remark-1">
+<p class="admonition-title"><span class="caption-number">Remark 7.2 </span> (Filtre idéal et filtrage en temsp réel)</p>
+<div class="remark-content section" id="proof-content">
+<p>Nous pouvons envisager en numérique de réaliser un filtrage idéal : on calcule le spectre de notre signal (TFD), on met à <span class="math notranslate nohighlight">\(0\)</span> dans le tableau correspondant toutes les fréquences que l’on souhaite éliminer puis on revient au signal filtré par TFD inverse. Cependant, ce filtrage ne se fait pas en temps réel car ils sous entend que l’on dispose de tout les échantillons de signal pour en calculer le spectre. Or, dans le cadre d’une transmission, les échantillons de signal sont envoyés et arrivent les uns après les autres (toutes les <span class="math notranslate nohighlight">\(T_e\)</span> secondes si <span class="math notranslate nohighlight">\(T_e\)</span> représente la période d’échantillonnage). Un filtrage ne pourra être réalisé en temps réel que s’il est réalisé dans le domaine temporel, en implantant l’expression <span class="math notranslate nohighlight">\( y(n) =-\sum_{k=1}^{M-1} a_k y(n-k) + \sum_{k=0}^{N-1} b_k x(n-k)\)</span> ou l’expression <span class="math notranslate nohighlight">\( y(n) =\sum_{k=0}^{N-1} b_k x(n-k)\)</span>, selon que l’on souhaite réaliser un filtre de type RII ou bien de type RIF et en s’assurant que le calcul de la/des somme(s) puisse se faire en <span class="math notranslate nohighlight">\(T_e\)</span> secondes. C’est cette implantation dans le domaine temporel qui va conduire, comme nous allons le voir par la suite, à un filtrage qui sera non idéal et donc à la nécessité de définir un gabarit à respecter. Notons également qu’il n’y aura pas un filtre unique respectant le gabarit. On pourra choisir celui qui satisfait le mieux aux critères que l’on se donne (le plus simple d’implantation, celui qui présente la charge de calcul la plus faible, le plus stable numériquement …)</p>
+</div>
+</div></div>
+<div class="section" id="synthese-des-filtres-a-reponse-impulsionnelle-finie">
+<h2><span class="section-number">7.7.2. </span>Synthèse des filtres à réponse impulsionnelle finie<a class="headerlink" href="#synthese-des-filtres-a-reponse-impulsionnelle-finie" title="Permalink to this headline">#</a></h2>
+<div class="section" id="synthese-par-developpement-en-serie-de-fourier">
+<h3><span class="section-number">7.7.2.1. </span>Synthèse par développement en série de Fourier<a class="headerlink" href="#synthese-par-developpement-en-serie-de-fourier" title="Permalink to this headline">#</a></h3>
+<p>La synthèse de filtres RIF est assez intuitive et facile à mettre en oeuvre. On se donne une réponse en fréquences idéale, <span class="math notranslate nohighlight">\(H_I(\widetilde{f})\)</span>, du filtre à réaliser et un gabarit à respecter. On travaille en numérique, on doit donc considérer que la réponse en fréquence est périodique de période <span class="math notranslate nohighlight">\(1\)</span> en fréquences normalisées (TF d’une réponse impulsionnelle échantillonnée). Un filtre RIF peut donc être synthétisé directement par un développement en série de Fourier de la réponse en fréquence idéale :</p>
+<div class="math notranslate nohighlight">
+\[
+H_I(\tilde{f}) = \sum_{k=-\infty}^{+\infty}h_I\left( k\right) e^{j 2 \pi \tilde{f} k}.
+\]</div>
+<p>où les coefficients de la série de Fourier <span class="math notranslate nohighlight">\(h_I(k)\)</span> représentent les échantillons de la réponse impulsionnelle, ou “coefficients” <span class="math notranslate nohighlight">\(b_k\)</span>, définissant le filtre :</p>
+<div class="math notranslate nohighlight">
+\[
+h_I\left( k\right) = \int_{-\frac{1}{2}}^{\frac{1}{2}} H_I(\tilde{f}) e^{-j 2 \pi k \tilde{f}} df
+\]</div>
+<p><span class="math notranslate nohighlight">\(h_I\left( k\right) \)</span> représente ici le k<span class="math notranslate nohighlight">\(^{\text{ième}}\)</span> point de la reponse impulsionnelle <span class="math notranslate nohighlight">\(h_I(t)\)</span> du filtre qui est échantillonnée avec une période d’échantillonnage <span class="math notranslate nohighlight">\(T_e=\frac{1}{F_e}\)</span> (il s’agit en réalité de <span class="math notranslate nohighlight">\(h_I(kT_e)\)</span>).</p>
+<p>En pratique le nombre de coefficients de la réponse impulsionnelle devra être limité. En effet celle-ci sera représentée par un tableau contenant un nombre fini de valeurs. On modélise cette limitation par l’application d’une fenêtre de troncature, <span class="math notranslate nohighlight">\(w(n)\)</span>, sur la réponse impusionnelle idéale. Cela conduit à la réponse impulsionnelle réelle suivante :</p>
+<div class="math notranslate nohighlight">
+\[
+h(n)=h_I(n) \times w(n)
+\]</div>
+<p>et donc à une réponse en fréquence qui n’est plus idéale :</p>
+<div class="math notranslate nohighlight">
+\[
+H(\widetilde{f})=H_I(\widetilde{f})\ast W(\widetilde{f})
+\]</div>
+<p>En effet, cette convolution de la réponse en fréquence idéale par la transformée de Fourier de la fenêtre de troncature va générer des transitions adoucies et des oscillations autour des transitions (voir tracé en bleu dans la figure <a class="reference internal" href="#gabarit"><span class="std std-numref">Fig. 7.2</span></a>. Nous retouvons les mêmes phénomènes que ceux déjà évoqués dans le chapitre sur la transformée de Fourier d’un signal de durée limitée.</p>
+<p>Lorsque l’on conserve tout simplement un certain nombre de points de la réponse impulsionnelle idéale pour former la réponse impulionnelle réelle : <span class="math notranslate nohighlight">\(\left[h_I(-N) ... h_I(N)\right]\)</span>, c’est comme si on utilisait une fenêtre de troncature rectangulaire. Dans les autres cas nous avons une pondération de la réponse impulsionnelle idéale, en plus de la troncature : <span class="math notranslate nohighlight">\(\left[h_I(-N)w(-N) ... h_I(N)w(N)\right]\)</span>, en supposant que l’on conserve <span class="math notranslate nohighlight">\(2N+1\)</span> éléments de <span class="math notranslate nohighlight">\(h_I(k)\)</span> et que l’on utilise une fenêtre de troncature, <span class="math notranslate nohighlight">\(w\)</span>, de <span class="math notranslate nohighlight">\(2N+1\)</span> échantillons : <span class="math notranslate nohighlight">\(\left[w(-N) ... w(N)\right]\)</span>.</p>
+<div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 7.11 </span> (Synthèse d’un filtre RIF)</p>
+<div class="definition-content section" id="proof-content">
+<p>**Le nombre de points conservé sur la réponse impulsionnelle idéale pour former le tableau représentant la réponse impulsionnelle réelle est appelé <em>ORDRE</em> du filtre. Les éléments du tableau représentant la réponse impulsionnelle réelle sont appelés <em>COEFFICIENTS</em> du filtre.</p>
+<p>La synthèse d’un filtre RIF va alors consister à déterminer l’ordre du filtre, ainsi que la fenêtre de troncature à utiliser, afin que celui-ci satisfasse au gabarit souhaité.**</p>
+</div>
+</div><p>Les figures <a class="reference internal" href="#ordre"><span class="std std-numref">Fig. 7.5</span></a> et <a class="reference internal" href="#fenetres"><span class="std std-numref">Fig. 7.6</span></a> présentent des exemples d’influence de l’ordre et de la fenêtre de troncature utilisée dans la cas d’un filtrage passe-bas.</p>
+<div class="figure align-default" id="ordre">
+<a class="reference internal image-reference" href="_images/Ordre.png"><img alt="_images/Ordre.png" src="_images/Ordre.png" style="height: 10cm;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7.5 </span><span class="caption-text">Exemple d’influence de l’ordre dans la synthèse d’un filtre RIF de type passe-bas - Fenêtre rectangulaire.</span><a class="headerlink" href="#ordre" title="Permalink to this image">#</a></p>
+</div>
+<div class="figure align-default" id="fenetres">
+<a class="reference internal image-reference" href="_images/Fenetre.png"><img alt="_images/Fenetre.png" src="_images/Fenetre.png" style="height: 10cm;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7.6 </span><span class="caption-text">Exemple d’influence de la fenêtre de troncature dans la synthèse d’un filtre RIF de type passe-bas - Ordre = <span class="math notranslate nohighlight">\(21\)</span>.</span><a class="headerlink" href="#fenetres" title="Permalink to this image">#</a></p>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Attention</p>
+<p>la réponse impulsionnelle obtenue doit être causale pour que le filtre soit réalisable. Si elle ne l’est pas en sortie de la synthèse on doit la décaler afin qu’elle le devienne et, ce faisant, on introduit un retard</p>
+</div>
+<div class="math notranslate nohighlight">
+\[h_{causal}(n)=h\left(n-\frac{N}{2}\right) \; \text{si} \; N \text{ est pair}\]</div>
+<div class="math notranslate nohighlight">
+\[h_{causal}(n)=h\left(n-\frac{N-1}{2}\right) \; \text{si} \; N \text{ est impair}\]</div>
+<p>Ce décalage ne modifie pas le module de la réponse en fréquence mais ajoute une phase linéaire en fréquence, qui ne fera qu’ajouter un facteur constant au temps de propagation de groupe (pas de dégroupage).</p>
+<p>En supposant <span class="math notranslate nohighlight">\(N\)</span> pair et en notant <span class="math notranslate nohighlight">\(H_{causal}(\widetilde{f})=TFD\left[h_{causal}(n)\right]\)</span>, on a :</p>
+<div class="math notranslate nohighlight">
+\[H_{causal}(\widetilde{f})=H(\widetilde{f})e^{-j \pi \widetilde{f} N}\]</div>
+<p>et donc :</p>
+<div class="math notranslate nohighlight">
+\[\left|H_{causal}(\widetilde{f})\right|=\left|H(\widetilde{f})\right|\]</div>
+<div class="math notranslate nohighlight">
+\[Arg \left[H_{causal}(\widetilde{f})\right]=Arg \left[H(\widetilde{f})\right]-\pi \widetilde{f} N\]</div>
+<div class="proof remark admonition" id="remark-3">
+<p class="admonition-title"><span class="caption-number">Remark 7.3 </span></p>
+<div class="remark-content section" id="proof-content">
+<ul>
+<li><p>Il existe un calcul (très approximatif) permettant de se donner un ordre de départ pour la synthèse : <span class="math notranslate nohighlight">\(\text{Ordre} = \frac{2}{3} log_{10}\left(\frac{1}{\delta_1 \delta_2}\right)\frac{F_e}{\Delta f}\)</span>, où <span class="math notranslate nohighlight">\(2 \delta_1\)</span> représente la largeur admise autour de <span class="math notranslate nohighlight">\(1\)</span> en bande passante (en linéaire pas en dB), <span class="math notranslate nohighlight">\(\delta_2\)</span> représente l’atténuation minimum en bande coupée (en linéaire pas en dB) et <span class="math notranslate nohighlight">\(\Delta f\)</span> représente la largeur de la zone de transition.</p></li>
+<li><p>En général le choix de la fenêtre fixe l’amplitude des oscillations et, pour une fenêtre donnée, l’ordre (<span class="math notranslate nohighlight">\(2N+1\)</span>) va fixer la largeur de la zone de transition. Comme cela a été vu dans le chapitre sur la transformée de Fourier, on retrouve ici le compromis à réaliser entre la largeur de la transition et l’amplitude des oscillations : une fenêtre qui permet d’avoir des oscillations de plus faible amplitude, comparée à une autre, fournit une zone de transition plus large pour un même ordre. Les caractéristiques des principales fenêtres sont résumées dans le tableau suivant :</p>
+<div class="admonition-caracteristiques-des-fenetres-de-troncature admonition" id="table-fenetre">
+<p class="admonition-title">Caractéristiques des fenêtres de troncature</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ |c || c | c |}
+\hline
+\text{Type}  &amp;  \text{Largeur} &amp;  \text{Attenuation min} \\ 
+\text{fenêtre}  &amp;  \text{zone de transition } (\Delta \omega) &amp;  \text{en bande coupée (en dB)} \\
+\hline
+\hline
+\mathrm{Rectangulaire} &amp; \frac{1.8 \pi}{Ordre} &amp; 21 \\ 
+\hline
+\mathrm{Barlett} &amp; \frac{5.6 \pi}{Ordre} &amp; 25 \\ 
+\hline
+\mathrm{Hanning} &amp; \frac{6.2 \pi}{Ordre} &amp; 44 \\ 
+\hline
+\mathrm{Hamming} &amp; \frac{6.6 \pi}{Ordre} &amp; 53 \\ 
+\hline
+\mathrm{Blackman} &amp; \frac{11 \pi}{Ordre} &amp; 74 \\ 
+\hline
+\mathrm{Kaiser } (\beta=4.54) &amp; \frac{5.8 \pi}{Ordre} &amp; 50 \\ 
+\hline
+\mathrm{Kaiser } (\beta=5.67) &amp; \frac{7.8 \pi}{Ordre} &amp; 60 \\ 
+\hline
+\end{array}
+\end{split}\]</div>
+</div>
+</li>
+<li><p>Les résultats obtenus par synthèse directe peuvent être ensuite optimisés grâce, par exemple, à la méthode des moindres carrés (minimisation au sens des moindres carrés de la distance entre le gabarit désiré et le gabarit du filtre obtenu par la synthèse en série de Fourier, fonction <em>firls.m</em> sous Malab) ou à l’algorithme de Remez (pour obtenir la meilleure approximation du gabarit présentant des ondulations d’amplitude constante, fonction <em>firgr.m</em> sous Malab).</p></li>
+<li><p>Il existe des fonctions matlab fournissant les coefficients du filtre souhaité sans avoir à réaliser le calcul de la impulsionnelle (voir, par exemple, <em>fir1.m</em> pour les filtres “classiques” ou <em>rcosdesign.m</em> pour réaliser un filtre en cosinus surélevé très utilisé en transmission). Il est également possibe de rentrer la réponse en fréquence souhaitée comme un tableau de point et d’obtenir la réponse impulsionnelle correspodante en utilisant la TFD inverse (<em>ifft.m</em> sous Matlab).</p></li>
+</ul>
+</div>
+</div></div>
+<div class="section" id="avantages-inconvenients-des-filtres-rif">
+<h3><span class="section-number">7.7.2.2. </span>Avantages/Inconvénients des filtres RIF<a class="headerlink" href="#avantages-inconvenients-des-filtres-rif" title="Permalink to this headline">#</a></h3>
+<ul>
+<li><p>Les filtres RIF sont fréquemment désignés par le terme de filtres non-récursifs, car ils ne présentent pas de boucle de réaction de la sortie vers l’entrée, ce qui assure leur stabilité de manière inconditionnelle (pour peu que les coefficients du filtre soient bornés).</p></li>
+<li><p>Les filtres RIF peuvent avoir très simplement un temps de propagation de groupe constant. En effet :</p>
+<p>Si</p>
+<div class="math notranslate nohighlight">
+\[Arg \left[H(\widetilde{f})\right]=\text{constante}\]</div>
+<p>alors</p>
+<div class="math notranslate nohighlight">
+\[Arg\left[H_{causal}(\widetilde{f})\right]=\text{constante}-\pi \widetilde{f} N\]</div>
+<p>Et donc :</p>
+<div class="math notranslate nohighlight">
+\[TPG(\widetilde{f})=-\frac{1}{2 \pi}\frac{dArg\left[H_{causal}(\widetilde{f})\right]}{d\widetilde{f}}=\frac{N}{2}\]</div>
+<p>Or <span class="math notranslate nohighlight">\(Arg \left[H(\widetilde{f})\right]\)</span> est constant si la réponse impulsionnelle <span class="math notranslate nohighlight">\(h(n)\)</span> est paire ou impaire :</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    Arg \left[H(\widetilde{f})\right] &amp;= Arg \left[\sum_{-\infty}^{+\infty} h(n) \left(\cos\left(2 \pi \widetilde{f} n \right)+j \sin\left(2 \pi \widetilde{f}n\right)\right)\right]\\
+    &amp;= atan\left(\frac{\sum_{-\infty}^{+\infty} h(n) \sin\left(2 \pi \widetilde{f} n \right)}{\sum_{-\infty}^{+\infty} h(n) \cos\left(2 \pi \widetilde{f} n \right)}\right)\\
+    &amp;= \left\{ \begin{array}{rl}
+    0 &amp; \mbox{si } h(n) pair\\
+    \frac{\pi}{2} &amp; \mbox{si } h(n) impair. \\
+    \end{array} \right. \;
+    \end{align*}\]</div>
+</li>
+<li><p>La synthèse des filtres RIF est très simple.</p></li>
+<li><p>Certains gabarits très contraints peuvent nécessiter l’utilisation de beaucoup trop de coefficients et donc un temps de calcul beaucoup trop élevé. Dans ce cas on utilisera plutôt un filtre de type RII.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="synthese-des-filtres-a-reponse-impulsionnelle-infinie">
+<h2><span class="section-number">7.7.3. </span>Synthèse des filtres à réponse impulsionnelle infinie<a class="headerlink" href="#synthese-des-filtres-a-reponse-impulsionnelle-infinie" title="Permalink to this headline">#</a></h2>
+<div class="section" id="principe-de-la-methode">
+<h3><span class="section-number">7.7.3.1. </span>Principe de la méthode<a class="headerlink" href="#principe-de-la-methode" title="Permalink to this headline">#</a></h3>
+<p>Les filtres RII sont des filtres qui présentent une boucle de réaction de la sortie vers l’entrée (filtres récursifs). L’idée de leur synthèse est de s’appuyer sur les bibliothèques très fournies de modèles pour le filtrage analogique.</p>
+<p>La synthèse de filtre analogique consiste, à partir d’un gabarit défini sur la réponse en fréquence souhaitée <span class="math notranslate nohighlight">\(H(f)\)</span>, à choisir un modèle dans la bibliothèque de modèles et à adapter ses paramètres de façon à obtenir un filtre satisfaisant au gabarit. Elle fournit une fonction de transfert en <span class="math notranslate nohighlight">\(p\)</span> : <span class="math notranslate nohighlight">\(H(p)\)</span>.</p>
+<p>En numérique le gabarit est donné sur <span class="math notranslate nohighlight">\(H(\tilde{f})\)</span> et nous souhaitons obtenir une fonction de transfert en <span class="math notranslate nohighlight">\(z\)</span> : <span class="math notranslate nohighlight">\(H(z)\)</span>.</p>
+<p>Il “suffirait” donc de trouver un “passage” entre <span class="math notranslate nohighlight">\(H(\tilde{f})\)</span> et <span class="math notranslate nohighlight">\(H(f)\)</span>, puis entre <span class="math notranslate nohighlight">\(H(p)\)</span> et <span class="math notranslate nohighlight">\(H(z)\)</span> pour utiliser ce qui existe en synthèse analogique à des fins numériques.</p>
+</div>
+<div class="section" id="mise-en-pratique">
+<h3><span class="section-number">7.7.3.2. </span>Mise en pratique<a class="headerlink" href="#mise-en-pratique" title="Permalink to this headline">#</a></h3>
+<p>La figure <a class="reference internal" href="#synthese-rii"><span class="std std-numref">Fig. 7.7</span></a> résume la manière de réaliser une synthèse de filtre RII. Les explications sont données dans la suite.</p>
+<div class="figure align-default" id="synthese-rii">
+<a class="reference internal image-reference" href="_images/Synthese_RII.png"><img alt="_images/Synthese_RII.png" src="_images/Synthese_RII.png" style="height: 15cm;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7.7 </span><span class="caption-text">Méthode de synthèse d’un filtre numérique rationnel de type RII (filtre récursif).</span><a class="headerlink" href="#synthese-rii" title="Permalink to this image">#</a></p>
+</div>
+<ul>
+<li><p>Le passage entre <span class="math notranslate nohighlight">\(H(\tilde{f})\)</span> et <span class="math notranslate nohighlight">\(H(f)\)</span> qui semble naturel est de prendre : <span class="math notranslate nohighlight">\(f=\tilde{f} F_e\)</span>. Nous allons cependant voir par la suite qu’il va falloir le modifier.</p></li>
+<li><p>Le passage entre <span class="math notranslate nohighlight">\(H(p)\)</span> et <span class="math notranslate nohighlight">\(H(z)\)</span> doit permettre de conserver au filtre numérique la stabilité et la conformité au gabarit fixé obtenue à l’issue de la synthèse analogique. Pour cela on doit trouver une transformée du plan des <span class="math notranslate nohighlight">\(p\)</span> vers le plan des <span class="math notranslate nohighlight">\(z\)</span> qui transforme :</p>
+<p>o le demi plan gauche (lieu de stabilité en analogique : pôles de <span class="math notranslate nohighlight">\(H(p)\)</span> à parties réelles négatives) en l’intérieur du cercle unité (lieu de stabilité en numérique : pôles de <span class="math notranslate nohighlight">\(H(z)\)</span> de modules inférieurs à <span class="math notranslate nohighlight">\(1\)</span>)</p>
+<p>o l’axe imaginaire (lieu de parcours de la réponse en fréquence en analogique : <span class="math notranslate nohighlight">\(H(f)=\left[H(p)\right]_{p=j \omega = j 2 \pi f}\)</span>) en le cercle unité (lieu de parcours de la réponse en fréquence en numérique : <span class="math notranslate nohighlight">\(H(\widetilde{f})=\left[H(z)\right]_{z=e^{j 2 \pi \widetilde{f}}}\)</span>).</p>
+<p>Cette transformée est la <strong>transformée bilinéaire</strong>. Elle est obtenue par approximation numérique de l’opérateur intégrale définissant le passage dans le filtre analogique (voir figure \ref{TBilin}) et donne <span class="math notranslate nohighlight">\(H(z)\)</span>, à partir de <span class="math notranslate nohighlight">\(H(p)\)</span> de la manière suivante  :</p>
+<div class="math notranslate nohighlight">
+\[
+        H\left( z\right)=\left[H(p)\right]_{p=\frac{2}{T_e}\frac{1-z^{-1}}{1+z^{-1}}}
+    \]</div>
+<div class="figure align-default" id="tbilin">
+<a class="reference internal image-reference" href="_images/Synthese_RII.png"><img alt="_images/Synthese_RII.png" src="_images/Synthese_RII.png" style="width: 16cm;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7.8 </span><span class="caption-text">Obtention de la transformée bilinéaire.</span><a class="headerlink" href="#tbilin" title="Permalink to this image">#</a></p>
+</div>
+</li>
+<li><p>Attention cependant car, même si la transformée bilinéaire permet de passer de <span class="math notranslate nohighlight">\(H(p)\)</span> à <span class="math notranslate nohighlight">\(H(z)\)</span> en conservant la stabilité et la réponse en fréquence du filtre, elle ne transforme pas les fréquences <span class="math notranslate nohighlight">\(f\)</span> en <span class="math notranslate nohighlight">\(\widetilde{f}=\frac{f}{F_e}\)</span>.</p></li>
+</ul>
+<p>En effet, quand <span class="math notranslate nohighlight">\(p=j 2 \pi f\)</span> alors</p>
+<div class="math notranslate nohighlight">
+\[z=\frac{1+\frac{j 2 \pi f T_e}{2}}{1-\frac{j 2 \pi f T_e}{2}}\]</div>
+<p>On a bien transformé l’axe imaginaire en le cercle unité mais pas <span class="math notranslate nohighlight">\(f\)</span> en <span class="math notranslate nohighlight">\(\widetilde{f}=\frac{f}{F_e}\)</span>.</p>
+<p>En écrivant</p>
+<div class="math notranslate nohighlight">
+\[z=\frac{1+\frac{j 2 \pi f T_e}{2}}{1-\frac{j 2 \pi f T_e}{2}}=e^{j 2 \pi \widetilde{f}}\]</div>
+<p>on obtient</p>
+<div class="math notranslate nohighlight">
+\[\widetilde{f}=\frac{1}{\pi} \arctan\left(\pi f T_e\right)\]</div>
+<p>Ceci n’est néanmoins pas génant car il suffit de passer du gabarit sur <span class="math notranslate nohighlight">\(H(\tilde{f})\)</span> au gabarit sur <span class="math notranslate nohighlight">\(H(f)\)</span>, non pas en faisant <span class="math notranslate nohighlight">\(f=\tilde{f} F_e\)</span> mais en faisant</p>
+<div class="math notranslate nohighlight">
+\[f=\frac{1}{\pi T_e} \tan\left(\pi \widetilde{f} \right)\]</div>
+<p>La distorsion de l’axe des fréquences introduite par la transformée bilinéaire est ainsi compensée par une prédistorsion lors du passage de <span class="math notranslate nohighlight">\(H(\tilde{f}) \)</span> vers <span class="math notranslate nohighlight">\(H(f)\)</span>.</p>
+<p>Une fois établis les passages de <span class="math notranslate nohighlight">\(H(\tilde{f}) \)</span> vers <span class="math notranslate nohighlight">\(H(f)\)</span> et de <span class="math notranslate nohighlight">\(H(p)\)</span> vers <span class="math notranslate nohighlight">\(H(z)\)</span>, on constate donc que la synthèse analogique revient à faire une synthèse analogique : choix du modèle et adaptation des paramètres pour satisfaire au gabarit.</p>
+<div class="proof definition admonition" id="definition-4">
+<p class="admonition-title"><span class="caption-number">Definition 7.12 </span> (Synthèse des filtres RII)</p>
+<div class="definition-content section" id="proof-content">
+<p>A partir du gabarit numérique souhaité (sur <span class="math notranslate nohighlight">\(H(\widetilde{f})\)</span>), on détermine un gabarit analogique (sur <span class="math notranslate nohighlight">\(H(f)\)</span>) en conservant les amplitudes mais en prédistordant les fréquences de la manière suivante :</p>
+<div class="math notranslate nohighlight">
+\[f=\frac{1}{\pi T_e} \tan\left(\pi \widetilde{f} \right)\]</div>
+<p>Le gabarit obtenu permet de réaliser une synthèse analogique, en utilisant les bibliothèques très fournies de modèles disponibles.</p>
+<p>Une fois la fonction de transfert analogique, <span class="math notranslate nohighlight">\(H(p)\)</span>, satisfaisant au gabarit obtenue, on déduit la fonction de transfert numérique <span class="math notranslate nohighlight">\(H(z)\)</span> en appliquant la transformée bilinéaire :</p>
+<div class="math notranslate nohighlight">
+\[
+H\left( z\right)=\left[H(p)\right]_{p=\frac{2}{T_e}\frac{1-z^{-1}}{1+z^{-1}}}.
+\]</div>
+<p>Cette transformée conserve la stabilité et la réponse en fréquence du filtre mais provoque une distorsion de l’axe des fréquence qui a été pré-compensée au départ.</p>
+</div>
+</div><p>Parmi les modèles analogiques les plus courants on trouve :</p>
+<ul>
+<li><p>Le modèle de Butterworth, qui est le plus simple :</p>
+<div class="math notranslate nohighlight">
+\[\left|H(f)\right|^2=\frac{1}{1+\left(\frac{f}{f_c}\right)^{2n}}, \text{ où } f_c \text{ représente la fréquence de coupure}\]</div>
+<p>Ce modèle ne présente pas d’ondulations, ni en bande passante, ni en bande atténuée.</p>
+<p>L’ordre du filtre <span class="math notranslate nohighlight">\(n\)</span> permet de régler la raideur de la transition entre la bande passante et la bande atténuée.</p>
+<p>La zone de transition est plus large qu’avec les autres modèles pour un même ordre mais la phase de la réponse en fréquence est modéremment non linéaire (TPG à peu près constant sur la bande passante).</p>
+</li>
+<li><p>Le modèle de Tchebychef (ou Chebyshev) présente  des ondulations en bande passante ou en bande atténuée (type I ou type II), ce qui permet une zone de transition plus étroite qu’un modèle de Butterworth pour un même ordre. La phase de la réponse en fréquence est, par contre, non linéaire (TPG non constant).</p></li>
+<li><p>Le modèle de Cauer (ou Elliptique) présente  des ondulations en bande passante et en bande atténuée, ce qui permet une zone de transition encore plus étroite que les modèles précédents pour un même ordre. La phase de la réponse en fréquence est, pour ce modèle aussie, non linéaire (TPG non constant).</p></li>
+<li><p>Le modèle de Bessel présente une phase à peu près linéaire pour la réponse en fréquence, ne présente pas d’ondulations ni en bande passante ni en bande atténuée mais sa zone de transition va être beaucoup plus large que les autres filtres pour un même ordre. C’est un filtre de phase.</p></li>
+</ul>
+<p>Des exemples de synthèse de filtres RII se trouvent dans la section exercices (corrections dans le poly exercices et problèmes résolus). Notons que de nombreuses fonctions sont proposées par Matlab pour réaliser une synthèse de RII en utilisant les différents modèles issus des bibliothèques analogiques.</p>
+</div>
+<div class="section" id="avantages-inconvenients-des-filtres-rii">
+<h3><span class="section-number">7.7.3.3. </span>Avantages/Inconvénients des filtres RII<a class="headerlink" href="#avantages-inconvenients-des-filtres-rii" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Du fait de la présence de pôles dans leur fonction de transfert (boucle de réaction), les filtres RII présentent des risques d’instabilité.</p></li>
+<li><p>Le temps de propagation de groupe des filtres RII n’est pas constant. Néanmoins , selon le modèle analogique utilisé, le TPG sera plus ou moins perturbé en bande passante.</p></li>
+<li><p>La synthèse des filtres RII est plus complexe que celle des filtres RIF.</p></li>
+<li><p>Le principal avantage des filtres RII va être de satisfaire certains gabarits avec un côut calculatoire plus faible que les filtres RIF (ordre, ou nombre de coefficients nécessaires, moins élevé).</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="ch6sec5.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">7.6. </span>Stabilité des filtres numériques rationnels récursifs (RII)</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="ch6sec7.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7.8. </span>Implantation des filtres numériques rationnels</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By N. Thomas<br/>
+  
+      &copy; Copyright 2021.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

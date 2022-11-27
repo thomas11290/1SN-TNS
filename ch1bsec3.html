@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.3. Systèmes à temps discret &#8212; Traitement Numerique du Signal - Signaux et systèmes à temps discret</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script >let toggleHintShow = 'Click to show';</script>
+    <script >let toggleHintHide = 'Click to hide';</script>
+    <script >let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2.5. Exercices" href="ch1bsec4.html" />
+    <link rel="prev" title="2.2. Outils de traitement pour les signaux à temps discret" href="ch1bsec2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/N7solo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Traitement Numerique du Signal - Signaux et systèmes à temps discret</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenue au cours de Traitement Numérique du Signal
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch1intro.html">
+   1. Introduction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec1.html">
+     1.1. Numérisation du signal : échantillonnage
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec2.html">
+     1.2. Numérisation du signal : Quantification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec3.html">
+     1.3. Numérisation du signal : exemples sur une image
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec4.html">
+     1.4. Outils de traitement du signal à numériser
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec5.html">
+     1.5. Notion de temps de traitement et de traitement temps réel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec6.html">
+     1.6. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="ch1bintro.html">
+   2. Signaux et systèmes à temps discret
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1bsec1.html">
+     2.1. Signaux à temps discret
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1bsec2.html">
+     2.2. Outils de traitement pour les signaux à temps discret
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.3. Systèmes à temps discret
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1bsec4.html">
+     2.5. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch2intro.html">
+   3. Transformée de Fourier Discrète (TFD)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec1.html">
+     3.1. De la TF à la TFD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec2.html">
+     3.2. Propriétés de la TFD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec3.html">
+     3.3. Algorithme de calcul rapide (FFT) de Cooley Tuckey
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec4.html">
+     3.4. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch3intro.html">
+   4. Fonctions d’inter et d’auto correlation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec1.html">
+     4.1. Calcul dans le domaine temporel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec2.html">
+     4.2. Calcul dans le domaine fréquentiel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec3.html">
+     4.3. Quelques propriétés
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch4intro.html">
+   5. Densité Spectrale de Puissance (DSP)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec1.html">
+     5.1. Estimateurs “de base” : corrélogramme, périodogramme
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec2.html">
+     5.2. Périodogramme avec fenêtrage
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec3.html">
+     5.3. Périodogramme cumulé (ou de Bartlett)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec4.html">
+     5.4. Périodogramme de Welch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec5.html">
+     5.5. Exemple sur une ligne d’image SAR
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch5intro.html">
+   6. La transformée en z
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec1.html">
+     6.1. Définition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec2.html">
+     6.2. Convergence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec3.html">
+     6.3. Propriétés
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec4.html">
+     6.4. Transformée en z inverse
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec5.html">
+     6.5. Tables de transformées en z
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec6.html">
+     6.6. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch6intro.html">
+   7. Filtrage numérique
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec1.html">
+     7.1. Un outil d’étude : la transformée en z
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec2.html">
+     7.2. Définitions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec3.html">
+     7.3. Réalisabilité d’un filtre numérique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec4.html">
+     7.4. Classification des filtres numériques rationnels : RIF, RII
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec5.html">
+     7.6. Stabilité des filtres numériques rationnels récursifs (RII)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec6.html">
+     7.7. Synthèse des filtres numériques rationnels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec7.html">
+     7.8. Implantation des filtres numériques rationnels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec8.html">
+     7.9. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="biblio.html">
+   8. Bibliographie
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Lien vers la page principale du cours <a href="https://ch-poulliat.github.io/Cours-TS-SN1A-N7/intro.html"> Traitement du Signal</a>.
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://ch-poulliat.github.io/Cours-Signal-Part-I/intro.html"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://ch-poulliat.github.io/Cours-Signal-Part-I/intro.html/issues/new?title=Issue%20on%20page%20%2Fch1bsec3.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/ch1bsec3.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2.3. Systèmes à temps discret
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-de-systemes-a-temps-discret">
+     2.3.1. Types de systèmes à temps discret
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exemples-de-systemes-a-temps-discret">
+     2.3.2. Exemples de systèmes à temps discret
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#etude-des-systemes-a-temps-discret-transformee-en-z">
+   2.4. Etude des systèmes à temps discret : transformée en
+   <span class="math notranslate nohighlight">
+    \(z\)
+   </span>
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Systèmes à temps discret</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2.3. Systèmes à temps discret
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-de-systemes-a-temps-discret">
+     2.3.1. Types de systèmes à temps discret
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exemples-de-systemes-a-temps-discret">
+     2.3.2. Exemples de systèmes à temps discret
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#etude-des-systemes-a-temps-discret-transformee-en-z">
+   2.4. Etude des systèmes à temps discret : transformée en
+   <span class="math notranslate nohighlight">
+    \(z\)
+   </span>
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="section" id="systemes-a-temps-discret">
+<h1><span class="section-number">2.3. </span>Systèmes à temps discret<a class="headerlink" href="#systemes-a-temps-discret" title="Permalink to this headline">#</a></h1>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 2.6 </span> (Systèmes numériques)</p>
+<div class="definition-content section" id="proof-content">
+<p><strong>Un système à temps discret, ou système numérique, est un opérateur <span class="math notranslate nohighlight">\(T\)</span> qui transforme un signal discret, <span class="math notranslate nohighlight">\(x\)</span>, placé à l’entrée du système (signal d’entrée ou de commande) en un signal discret, <span class="math notranslate nohighlight">\(y\)</span>, en sortie du système (signal de sortie ou réponse) : <span class="math notranslate nohighlight">\(y=T(x)\)</span>.</strong></p>
+</div>
+</div><div class="section" id="types-de-systemes-a-temps-discret">
+<h2><span class="section-number">2.3.1. </span>Types de systèmes à temps discret<a class="headerlink" href="#types-de-systemes-a-temps-discret" title="Permalink to this headline">#</a></h2>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 2.7 </span> (Systèmes linéaires)</p>
+<div class="definition-content section" id="proof-content">
+<p>Un système à temps discret défini par l’opérateur <span class="math notranslate nohighlight">\(T\)</span> est dit linéaire si :</p>
+<div class="math notranslate nohighlight">
+\[
+T\left(\alpha x_1 + \beta x_2 \right)=\alpha T\left(x_1\right)+\beta T\left(x_2\right)
+\]</div>
+<p><span class="math notranslate nohighlight">\(\forall\)</span> <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span> signaux d’entrée du système et <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> <span class="math notranslate nohighlight">\(\in \mathbb{C}\)</span>.</p>
+</div>
+</div><div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 2.8 </span> (Systèmes sans mémoire)</p>
+<div class="definition-content section" id="proof-content">
+<p>Un système à temps discret est dit sans mémoire si sa sortie à l’instant <span class="math notranslate nohighlight">\(n\)</span> ne dépend que de son entrée à l’instant <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Dans tous les autres cas le système sera dit à mémoire, mémoire qui peut être finie (la sortie à l’instant <span class="math notranslate nohighlight">\(n\)</span> dépend uniquement de l’entrée aux instants <span class="math notranslate nohighlight">\(n\)</span> à <span class="math notranslate nohighlight">\(n-N\)</span>) ou infinie (la sortie à l’instant <span class="math notranslate nohighlight">\(n\)</span> dépend de toutes les valeurs passées de l’entrée).</p>
+</div>
+</div><div class="proof definition admonition" id="definition-3">
+<p class="admonition-title"><span class="caption-number">Definition 2.9 </span> (Systèmes causaux)</p>
+<div class="definition-content section" id="proof-content">
+<p>Un système à temps discret est dit causal si sa sortie à l’instant <span class="math notranslate nohighlight">\(n\)</span> ne dépend que des valeurs passées de son entrée (instants <span class="math notranslate nohighlight">\(m \leq n\)</span>).</p>
+<p>Un système à temps discret est dit anticausal si sa sortie à l’instant <span class="math notranslate nohighlight">\(n\)</span> ne dépend que des valeurs futures de son entrée (instants <span class="math notranslate nohighlight">\(m &gt; n\)</span>).</p>
+</div>
+</div><div class="proof remark admonition" id="remark-4">
+<p class="admonition-title"><span class="caption-number">Remark 2.1 </span></p>
+<div class="remark-content section" id="proof-content">
+<ul class="simple">
+<li><p>Un système peut être constitué d’une partie causale et d’une partie anticausale.</p></li>
+<li><p>Nous verrons par la suite que la sortie d’un système peut également dépendre de ses valeurs passées (présence d’une boucle de récation).</p></li>
+<li><p>Un système numérique sera toujours causal à un retard près.</p></li>
+</ul>
+</div>
+</div><div class="proof definition admonition" id="definition-5">
+<p class="admonition-title"><span class="caption-number">Definition 2.10 </span> (Systèmes invariants dans le temps)</p>
+<div class="definition-content section" id="proof-content">
+<p>Un système à temps discret défini par l’opérateur <span class="math notranslate nohighlight">\(T\)</span> est dit invariant dans le temps (ou invariant par translation temporelle) si :</p>
+<div class="math notranslate nohighlight">
+\[
+y(n-n_0)=T\left(x(n-n_0) \right) \; \text{pour }  y(n)=T\left(x(n) \right)
+\]</div>
+<p><span class="math notranslate nohighlight">\(n_0\)</span> représentant un retard de <span class="math notranslate nohighlight">\(n_0\)</span> échantillons.</p>
+</div>
+</div><div class="proof definition admonition" id="definition-6">
+<p class="admonition-title"><span class="caption-number">Definition 2.11 </span> (Systèmes stables)</p>
+<div class="definition-content section" id="proof-content">
+<p>Un système à temps discret est stable si à toute entrée bornée correspond une sortie bornée : <span class="math notranslate nohighlight">\(|x(n)|&lt;\infty \Rightarrow |y(n)|&lt; \infty\)</span> (condition BIBO = Borned Input Borned Output).</p>
+</div>
+</div></div>
+<div class="section" id="exemples-de-systemes-a-temps-discret">
+<h2><span class="section-number">2.3.2. </span>Exemples de systèmes à temps discret<a class="headerlink" href="#exemples-de-systemes-a-temps-discret" title="Permalink to this headline">#</a></h2>
+<div class="proof example admonition" id="example-7">
+<p class="admonition-title"><span class="caption-number">Example 2.1 </span> (Introduction d’un retard)</p>
+<div class="example-content section" id="proof-content">
+<p>Un système numérique introduisant un retard de <span class="math notranslate nohighlight">\(n_0\)</span> échantillons est défini par <span class="math notranslate nohighlight">\(y(n)=x(n-n_0)\)</span> (<span class="math notranslate nohighlight">\(x(n+n_0)\)</span> représente une avance).</p>
+</div>
+</div><div class="proof example admonition" id="example-8">
+<p class="admonition-title"><span class="caption-number">Example 2.2 </span> (Calcul d’une valeur cumulée)</p>
+<div class="example-content section" id="proof-content">
+<p>Un système numérique calulant une valeur cumulée est défini par <span class="math notranslate nohighlight">\(y(n)=\sum_{k=-\infty}^n x(k)\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="example-9">
+<p class="admonition-title"><span class="caption-number">Example 2.3 </span> (Calcul d’une valeur moyenne)</p>
+<div class="example-content section" id="proof-content">
+<p>Un système numérique peut calculer une valeur moyenne, par exemple entre échantillons voisins : <span class="math notranslate nohighlight">\(y(n)=\frac{1}{3}\left(x(n-1)+x(n)+x(n+1)\right)\)</span>.</p>
+</div>
+</div><div class="proof example admonition" id="example-10">
+<p class="admonition-title"><span class="caption-number">Example 2.4 </span> (Filtres numériques)</p>
+<div class="example-content section" id="proof-content">
+<p>Un système numérique peut réaliser un filtrage linéaire du signal d’entrée. Une équation récurrente lie alors entrée et sortie, par exemple : <span class="math notranslate nohighlight">\(y(n)=x(n)+0.5x(n-1)+0.3x(n-2)\)</span>.</p>
+</div>
+</div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Les filtres numériques font l’objet d’un chapitre complet par la suite (chapitre <span class="math notranslate nohighlight">\(6\)</span>).</strong></p>
+</div>
+</div>
+</div>
+<div class="section" id="etude-des-systemes-a-temps-discret-transformee-en-z">
+<h1><span class="section-number">2.4. </span>Etude des systèmes à temps discret : transformée en <span class="math notranslate nohighlight">\(z\)</span><a class="headerlink" href="#etude-des-systemes-a-temps-discret-transformee-en-z" title="Permalink to this headline">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Tout comme la transformée de Laplace permet l’étude des systèmes analogiques linéaires invariants dans le temps, la transformée en <span class="math notranslate nohighlight">\(z\)</span> va permettre l’étude des systèmes numériques linéaires invariants dans le temps.</strong></p>
+<p><strong>Les principaux éléments concernant cette transformée sont donnés dans un des chapitres suivant (chapitre <span class="math notranslate nohighlight">\(5\)</span>) et elle est utilisée dans le chapitre <span class="math notranslate nohighlight">\(6\)</span> pour étudier les filtres numériques linéaires invariants dans le temps.</strong></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="ch1bsec2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2.2. </span>Outils de traitement pour les signaux à temps discret</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="ch1bsec4.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.5. </span>Exercices</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By N. Thomas<br/>
+  
+      &copy; Copyright 2021.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

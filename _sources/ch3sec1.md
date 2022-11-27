@@ -56,7 +56,7 @@ $$
     \mathbb{E}\left[\widehat{R}_{xy}(k)\right]=\frac{N-|k|}{N}R_{xy}(k).
 $$
 
-Le biais est ici multiplicatif et triangulaire (voir figure \ref{fig1cosinus} dans les exemples).
+Le biais est ici multiplicatif et triangulaire (voir figure {numref}`fig1cosinus` dans les exemples).
 
 #### Estimateur non biaisé
 

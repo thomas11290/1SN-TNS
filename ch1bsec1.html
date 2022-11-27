@@ -1,0 +1,880 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.1. Signaux à temps discret &#8212; Traitement Numerique du Signal - Signaux et systèmes à temps discret</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script >let toggleHintShow = 'Click to show';</script>
+    <script >let toggleHintHide = 'Click to hide';</script>
+    <script >let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2.2. Outils de traitement pour les signaux à temps discret" href="ch1bsec2.html" />
+    <link rel="prev" title="2. Signaux et systèmes à temps discret" href="ch1bintro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/N7solo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Traitement Numerique du Signal - Signaux et systèmes à temps discret</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenue au cours de Traitement Numérique du Signal
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch1intro.html">
+   1. Introduction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec1.html">
+     1.1. Numérisation du signal : échantillonnage
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec2.html">
+     1.2. Numérisation du signal : Quantification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec3.html">
+     1.3. Numérisation du signal : exemples sur une image
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec4.html">
+     1.4. Outils de traitement du signal à numériser
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec5.html">
+     1.5. Notion de temps de traitement et de traitement temps réel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec6.html">
+     1.6. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="ch1bintro.html">
+   2. Signaux et systèmes à temps discret
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.1. Signaux à temps discret
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1bsec2.html">
+     2.2. Outils de traitement pour les signaux à temps discret
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1bsec3.html">
+     2.3. Systèmes à temps discret
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1bsec4.html">
+     2.5. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch2intro.html">
+   3. Transformée de Fourier Discrète (TFD)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec1.html">
+     3.1. De la TF à la TFD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec2.html">
+     3.2. Propriétés de la TFD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec3.html">
+     3.3. Algorithme de calcul rapide (FFT) de Cooley Tuckey
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec4.html">
+     3.4. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch3intro.html">
+   4. Fonctions d’inter et d’auto correlation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec1.html">
+     4.1. Calcul dans le domaine temporel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec2.html">
+     4.2. Calcul dans le domaine fréquentiel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec3.html">
+     4.3. Quelques propriétés
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch4intro.html">
+   5. Densité Spectrale de Puissance (DSP)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec1.html">
+     5.1. Estimateurs “de base” : corrélogramme, périodogramme
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec2.html">
+     5.2. Périodogramme avec fenêtrage
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec3.html">
+     5.3. Périodogramme cumulé (ou de Bartlett)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec4.html">
+     5.4. Périodogramme de Welch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec5.html">
+     5.5. Exemple sur une ligne d’image SAR
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch5intro.html">
+   6. La transformée en z
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec1.html">
+     6.1. Définition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec2.html">
+     6.2. Convergence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec3.html">
+     6.3. Propriétés
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec4.html">
+     6.4. Transformée en z inverse
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec5.html">
+     6.5. Tables de transformées en z
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec6.html">
+     6.6. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch6intro.html">
+   7. Filtrage numérique
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec1.html">
+     7.1. Un outil d’étude : la transformée en z
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec2.html">
+     7.2. Définitions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec3.html">
+     7.3. Réalisabilité d’un filtre numérique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec4.html">
+     7.4. Classification des filtres numériques rationnels : RIF, RII
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec5.html">
+     7.6. Stabilité des filtres numériques rationnels récursifs (RII)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec6.html">
+     7.7. Synthèse des filtres numériques rationnels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec7.html">
+     7.8. Implantation des filtres numériques rationnels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch6sec8.html">
+     7.9. Exercices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="biblio.html">
+   8. Bibliographie
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Lien vers la page principale du cours <a href="https://ch-poulliat.github.io/Cours-TS-SN1A-N7/intro.html"> Traitement du Signal</a>.
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://ch-poulliat.github.io/Cours-Signal-Part-I/intro.html"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://ch-poulliat.github.io/Cours-Signal-Part-I/intro.html/issues/new?title=Issue%20on%20page%20%2Fch1bsec1.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/ch1bsec1.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classes-de-signaux">
+   2.1.1. Classes de Signaux
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#signaux-deterministes-a-temps-discret">
+     2.1.1.1. Signaux Déterministes à temps discret
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#signaux-aleatoires-a-temps-discret">
+     2.1.1.2. Signaux Aléatoires à temps discret
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quelques-proprietes">
+   2.1.2. Quelques propriétés
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quelques-signaux-particuliers">
+   2.1.3. Quelques signaux particuliers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#representation-des-signaux-a-temps-discret">
+   2.1.4. Représentation des signaux à temps discret
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Signaux à temps discret</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classes-de-signaux">
+   2.1.1. Classes de Signaux
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#signaux-deterministes-a-temps-discret">
+     2.1.1.1. Signaux Déterministes à temps discret
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#signaux-aleatoires-a-temps-discret">
+     2.1.1.2. Signaux Aléatoires à temps discret
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quelques-proprietes">
+   2.1.2. Quelques propriétés
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quelques-signaux-particuliers">
+   2.1.3. Quelques signaux particuliers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#representation-des-signaux-a-temps-discret">
+   2.1.4. Représentation des signaux à temps discret
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="section" id="signaux-a-temps-discret">
+<h1><span class="section-number">2.1. </span>Signaux à temps discret<a class="headerlink" href="#signaux-a-temps-discret" title="Permalink to this headline">#</a></h1>
+<div class="section" id="classes-de-signaux">
+<h2><span class="section-number">2.1.1. </span>Classes de Signaux<a class="headerlink" href="#classes-de-signaux" title="Permalink to this headline">#</a></h2>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 2.1 </span> (Classes des signaux numériques)</p>
+<div class="definition-content section" id="proof-content">
+<p><strong>Comme pour les signaux à temps continu, les signaux à temps discrets (ou signaux discret, ou signaux numériques) peuvent être déterministes (à énergie finie ou à puissance moyenne finie, périodiques ou non périodiques) ou aléatoires.</strong></p>
+</div>
+</div><div class="section" id="signaux-deterministes-a-temps-discret">
+<h3><span class="section-number">2.1.1.1. </span>Signaux Déterministes à temps discret<a class="headerlink" href="#signaux-deterministes-a-temps-discret" title="Permalink to this headline">#</a></h3>
+<p>On parlera de signal déterministe à temps discret pour désigner une suite numérique de <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span> dans <span class="math notranslate nohighlight">\(\mathbb{C}\)</span> : <span class="math notranslate nohighlight">\(x(n) \in \mathbb{C}\)</span> avec <span class="math notranslate nohighlight">\(n \in \mathbb{Z}\)</span>. Il s’agit ici d’un signal à une variable ou monodimensionnel mais un signal numérique peut également être multidimenssionnel. Nous avons, par exemple, dans le chapitre précédent des images définies par des suites numérique <span class="math notranslate nohighlight">\(x(n,m) \in \mathbb{N}\)</span>, représentant les niveaux de gris des pixels de l’image pour chaque position <span class="math notranslate nohighlight">\((m,n)\)</span>, avec <span class="math notranslate nohighlight">\(n, m \in \mathbb{N}\)</span>.</p>
+<p>Parmi les signaux déterministes à temps discret nous retrouvons les catégories suivantes :</p>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 2.2 </span> (Classes de signaux déterministes à temps discret)</p>
+<div class="definition-content section" id="proof-content">
+<ul>
+<li><p><em><strong>Signaux déterministes à temps discret à énergie finie :</strong></em></p>
+<div class="math notranslate nohighlight">
+\[E=\sum_{n=-\infty}^{+\infty} \left|x(n)\right|^2 &lt; +\infty\]</div>
+</li>
+<li><p><em><strong>Signaux déterministes à temps discret à puissance moyenne finie non périodiques :</strong></em></p>
+<div class="math notranslate nohighlight">
+\[P=\lim_{n \rightarrow \infty} \frac{1}{2N+1} \sum_{n=-N}^{N} \left|x(n)\right|^2 &lt; +\infty\]</div>
+</li>
+<li><p><em><strong>Signaux déterministes à temps discret à puissance moyenne finie périodiques :</strong></em></p>
+<div class="math notranslate nohighlight">
+\[P=\frac{1}{N} \sum_{n=O}^{N} \left|x(n)\right|^2 &lt; +\infty\]</div>
+<p>en considérant un signal discret périodique, de période <span class="math notranslate nohighlight">\(N\)</span> : <span class="math notranslate nohighlight">\(x(n+N)=x(n)\)</span>.</p>
+</li>
+</ul>
+</div>
+</div></div>
+<div class="section" id="signaux-aleatoires-a-temps-discret">
+<h3><span class="section-number">2.1.1.2. </span>Signaux Aléatoires à temps discret<a class="headerlink" href="#signaux-aleatoires-a-temps-discret" title="Permalink to this headline">#</a></h3>
+<p>Un processus aléatoire discret <span class="math notranslate nohighlight">\(X\)</span> est décrit par ses propriétés statistiques, en particulier par :</p>
+<ul>
+<li><p>sa moyenne (moment d’ordre <span class="math notranslate nohighlight">\(1\)</span>) :</p>
+<div class="math notranslate nohighlight">
+\[m_X(n)=E\left[X(n)\right]\]</div>
+</li>
+<li><p>sa fonction d’autocorrélation (moment d’ordre <span class="math notranslate nohighlight">\(2\)</span>) :</p>
+<div class="math notranslate nohighlight">
+\[R_X(k,n)=E\left[X(n)x^*(n-k)\right]\]</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="quelques-proprietes">
+<h2><span class="section-number">2.1.2. </span>Quelques propriétés<a class="headerlink" href="#quelques-proprietes" title="Permalink to this headline">#</a></h2>
+<div class="proof property admonition" id="property-2">
+<p class="admonition-title"><span class="caption-number">Property 2.1 </span></p>
+<div class="property-content section" id="proof-content">
+<ol>
+<li><p><strong>Périodicité :</strong></p>
+<p>Un signal discret est périodique, de période <span class="math notranslate nohighlight">\(N\)</span> si <span class="math notranslate nohighlight">\(x(n+N)=x(n), \; \forall n \in \mathbb{Z}\)</span>.</p>
+</li>
+<li><p><strong>Symétrie, symétrie hermitienne :</strong></p>
+<ul class="simple">
+<li><p>Un signal discret réel est symétrique, ou pair, si <span class="math notranslate nohighlight">\(x(-n)=x(n), \; \forall n \in \mathbb{Z}\)</span>, antisymétrique, ou impair, si <span class="math notranslate nohighlight">\(x(-n)=-x(n) \; \forall n \in \mathbb{Z}\)</span>.</p></li>
+<li><p>Un signal discret complexe possède la propriété de symétrie hermitienne si <span class="math notranslate nohighlight">\(x(-n)=x^*(n), \; \forall n \in \mathbb{Z}\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Translation (ou retard) :</strong></p>
+<p>Un signal discret <span class="math notranslate nohighlight">\(x(n)\)</span> translaté (retardé) de <span class="math notranslate nohighlight">\(k\)</span> éhantillons s’écrit <span class="math notranslate nohighlight">\(x(n-k)\)</span>.</p>
+</li>
+<li><p><strong>Stationnarité :</strong></p>
+<p>Un processus aléatoire discret, <span class="math notranslate nohighlight">\(X\)</span>, est stationnaire si ses moments sont invariants pour tout changement de l’origine des temps. Il l’est au second ordre si sa moyenne et sa fonction d’autocorrélation sont indépendantes de <span class="math notranslate nohighlight">\(n\)</span> : <span class="math notranslate nohighlight">\(m_X(n)=m_X\)</span> et <span class="math notranslate nohighlight">\(R_X(k,n)=R_X(k)\)</span>.</p>
+</li>
+<li><p><strong>Ergodicité :</strong></p>
+<p>Un processus aléatoire discret, <span class="math notranslate nohighlight">\(X\)</span>, est ergodique si ses moments statistiques sont identiques à ses moments temporels. Cette dernière propriété est importante car elle permet d’étudier le processus en utilisant une de ses réalisations, chaque réalisation du processus aléatoire  à temps discret étant un signal à temps discret déterministe.</p>
+</li>
+</ol>
+</div>
+</div></div>
+<div class="section" id="quelques-signaux-particuliers">
+<h2><span class="section-number">2.1.3. </span>Quelques signaux particuliers<a class="headerlink" href="#quelques-signaux-particuliers" title="Permalink to this headline">#</a></h2>
+<div class="proof definition admonition" id="definition-3">
+<p class="admonition-title"><span class="caption-number">Definition 2.3 </span> (Dirac numérique)</p>
+<div class="definition-content section" id="proof-content">
+<p>Le Dirac numérique, ou impulsion unité, est défini par :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\delta(k) = \left\{
+    \begin{array}{rl}
+        1 &amp; \mbox{si } k=0\\
+        0 &amp; \mbox{sinon} \\
+    \end{array} \right. \;
+\end{split}\]</div>
+</div>
+</div><div class="proof definition admonition" id="definition-4">
+<p class="admonition-title"><span class="caption-number">Definition 2.4 </span> (Echelon unité)</p>
+<div class="definition-content section" id="proof-content">
+<p>L’échelon unité, ou fonction de Heaviside, est défini en numérique par :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+u(k) = \left\{
+    \begin{array}{rl}
+        1 &amp; \mbox{si } k \geq 0\\
+        0 &amp; \mbox{sinon} \\
+    \end{array} \right. \;
+\end{split}\]</div>
+</div>
+</div><div class="proof definition admonition" id="definition-5">
+<p class="admonition-title"><span class="caption-number">Definition 2.5 </span> (Fonction signe)</p>
+<div class="definition-content section" id="proof-content">
+<p>La fonction signe est définie en numérique par :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+sign(k) = \left\{
+\begin{array}{rl}
+    -1 &amp; \mbox{si } k &lt; 0\\
+    0 &amp; \mbox{si } k = 0\\
+    +1 &amp; \mbox{si } k &gt; 0 \\
+\end{array} \right. \;
+\end{split}\]</div>
+</div>
+</div></div>
+<div class="section" id="representation-des-signaux-a-temps-discret">
+<h2><span class="section-number">2.1.4. </span>Représentation des signaux à temps discret<a class="headerlink" href="#representation-des-signaux-a-temps-discret" title="Permalink to this headline">#</a></h2>
+<p>On utilise généralement une représentation du signal numérique <strong>sous la forme d’un tableau</strong> :</p>
+<div class="math notranslate nohighlight">
+\[x=\left[x(0)...x(N-1)\right]\]</div>
+<p>pour des signaux à une dimension, avec <span class="math notranslate nohighlight">\(x(n)\)</span> qui représente la valeur du signal pour l’indice <span class="math notranslate nohighlight">\(n\)</span> (soit en réalité l’échantillon <span class="math notranslate nohighlight">\(x(nT_e)\)</span> de signal).</p>
+<p>Ou bien <strong>sous la forme d’une matrice</strong> :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x=\begin{pmatrix}
+x(0,0) &amp; ... &amp; x(0,M-1) \\
+x(1,0) &amp; ... &amp; x(1,M-1) \\
+ &amp; ... &amp; \\
+x(N-1,0) &amp; ... &amp; x(N-1,M-1) 
+\end{pmatrix}\end{split}\]</div>
+<p>pour des signaux bidimensionnels, par exemple pour une image où <span class="math notranslate nohighlight">\(x(i,j)\)</span> représente la valeur du pixel sur la ligne <span class="math notranslate nohighlight">\(i\)</span> et colonne <span class="math notranslate nohighlight">\(j\)</span>.</p>
+<p>On peut aussi représenter le signal <em><strong>de manière graphique</strong></em> en traçant les valeurs du tableau en fonction de ses indices <span class="math notranslate nohighlight">\(n\)</span>, ou bien en fonction du temps, en introduisant la variable <span class="math notranslate nohighlight">\(T_e\)</span>, si celle-ci est connue, au niveau de l’échelle des absisses.</p>
+<p>Si nous prenons l’exemple d’une fonction porte numérique :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x(k) = \left\{
+    \begin{array}{rl}
+        1 &amp; \mbox{pour } k=0 \; \text{à} \; N-1\\
+        0 &amp; \mbox{ailleurs} \\
+    \end{array} \right. \;
+\end{split}\]</div>
+<p>Nous pouvons la représenter, par exemple pour <span class="math notranslate nohighlight">\(N=7\)</span>, à l’aide du tableau suivant <span class="math notranslate nohighlight">\(\left[1 \; 1 \; 1 \; 1 \; 1 \; 1 \; 1 \right]\)</span>, ou bien la tracer avec une échelle en numéros d’indice ou en temps, comme le montre la figure suivante.</p>
+<div class="figure align-default" id="signal-num">
+<a class="reference internal image-reference" href="_images/signal_num.png"><img alt="_images/signal_num.png" src="_images/signal_num.png" style="width: 8cm;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Exemple de tracé d’une fonction porte numérique composée de <span class="math notranslate nohighlight">\(7\)</span> échantillons.</span><a class="headerlink" href="#signal-num" title="Permalink to this image">#</a></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="ch1bintro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2. </span>Signaux et systèmes à temps discret</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="ch1bsec2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.2. </span>Outils de traitement pour les signaux à temps discret</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By N. Thomas<br/>
+  
+      &copy; Copyright 2021.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

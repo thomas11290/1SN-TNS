@@ -71,7 +71,7 @@ Cette expression est appelée formule de reconstitution de Shannon.
 
 La formule de reconstitution de Shannon permet de voir l'échantillonnage idéal d'une autre manière : comme étant la décomposition du signal sur la base orthogonale des fonctions $sinc\left(\pi F_e (t-kT_e)\right)$, $k \in \mathbb{Z}$.
 
-<span align="center" style="color:rgba(var(--pst-color-link),1)"> **Si, par contre, la condition de Shannon n'est pas respectée**</span>, il n'est alors plus possible de reconstituer le signal $x(t)$, à partir de la suite des échantillons prélevés tous les $T_e$, car les périodisations de $X(f)$ tous les $F_e$ vont venir se superposer à $X(f)$. On parle de repliement ou d'aliasing (voir {numref}`exercice2`.**
+<span align="center" style="color:rgba(var(--pst-color-link),1)"> **Si, par contre, la condition de Shannon n'est pas respectée**</span>, il n'est alors plus possible de reconstituer le signal $x(t)$, à partir de la suite des échantillons prélevés tous les $T_e$, car les périodisations de $X(f)$ tous les $F_e$ vont venir se superposer à $X(f)$. On parle de repliement ou d'aliasing (voir {numref}`exercice2`).
 
 On verra néanmoins dans l'{numref}`exercice3` que pour certains signaux, présentant des propriétés particulières, il est possible d'échantillonner sans perte d'information en ne respectant pas la condition de Shannon.
 
